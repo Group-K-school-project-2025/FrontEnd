@@ -1,0 +1,306 @@
+/* -------------------------------
+    General Button Styles
+--------------------------------*/
+.clickable-slide {
+    cursor: pointer; /* mouse showes as a hand */
+    transition: transform 0.2s ease-in-out;
+}
+
+.clickable-slide:hover {
+    transform: scale(1.05); 
+}
+
+/* -------------------------------
+    Button Container Positioning
+--------------------------------*/
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: fixed; /* position fixed to keep button on top */
+    top: 2px; /* position the button at the top */
+    left: 50%; /* center it horizontally */
+    transform: translateX(-50%); /* center it perfectly */
+    z-index: 9999; /* ensure it's above other elements */
+}
+
+/* Image Button Styling */
+.image-button img {
+    width: 30px; /* adjust the width to make it visible */
+    height: auto;
+    margin-top: 0; /* remove the negative margin */
+}
+
+/* -------------------------------
+    Navbar
+--------------------------------*/
+.navbar {
+    background-color: #636262 !important;
+    padding-top: 0.2rem; 
+        padding-bottom: 0.2rem;
+}
+
+
+.offcanvas-custom {
+    width: 50%;
+}
+
+
+/* -------------------------------
+    Hero Section
+--------------------------------*/
+.hero {
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out; /* slow animation */
+}
+
+.hero-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    max-width: 400px;
+}
+
+.hero-title {
+    font-size: 12px; 
+    font-weight: bold;
+    color: white; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    background:transparent;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: -200px; 
+    text-align: center;
+}
+
+.btn-outline-dark {
+    border-radius: 50px;
+    padding: 10px 25px;
+}
+
+/* -------------------------------
+    Background Section
+--------------------------------*/
+.background-section {
+    background-image: url('pictures/background\ picture.png');
+    background-size: cover;
+    background-position: center center;
+    min-height: 400px;
+    padding: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* for positioning gallery */
+}
+
+/* -------------------------------
+    Clickable Slide Hover Effect
+--------------------------------*/
+.clickable-slide {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.clickable-slide:hover {
+    transform: scale(1.05);
+}
+
+/* -------------------------------
+    Gallery Container (Hidden by Default)
+--------------------------------*/
+/* Gallery Container (Hidden by Default) */
+/* Hide the gallery initially */
+.gallery-container {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%; /* Width of the gallery */
+    max-width: 800px;
+    height: 350px; /* Height of the gallery */
+    background-color: transparent;
+    border-radius: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+}
+
+/* Show the gallery when class 'show' is added */
+.gallery-container.show {
+    display: block; /* Make it visible */
+}
+
+/* -------------------------------
+    Gallery Images Container
+--------------------------------*/
+.gallery-images {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+}
+
+/* Each image inside the gallery */
+.gallery-images .gallery-item {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Image styling */
+.gallery-images img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+    min-width: 100%;
+    margin-right: 10px;
+    scroll-snap-align: center;
+}
+
+
+/* -------------------------------
+    Gallery Indicators (Pagination Dots)
+--------------------------------*/
+/* Styling for the gallery control buttons (indicators) */
+.gallery-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.gallery-indicators .indicator {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.gallery-indicators .indicator.active {
+    background-color: #000;
+}
+/* -------------------------------
+    Close Button Style
+--------------------------------*/
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.image-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.image-button img {
+    width: 20px;
+    height: auto;
+    margin-top: -740px; /* اگر این مشکل‌ساز بود، بررسیش می‌کنیم */
+}
+
+/* footer */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    
+}
+
+
+
+
+/* login section */
+.login-page {
+    background-image: url('pictures/login_background2.jpeg');
+    background-size: cover;
+    background-position: center;
+    min-height: 60vh;
+    width: 100%;
+    
+  }
+
+.login-card {
+    max-width: 400px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+}
+
+.login-card h2 {
+    font-weight: bold;
+    color: #333;
+}
+
+.login-card .form-label {
+    font-weight: 500;
+    color: #555;
+}
+
+.login-card .form-control {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.login-card .btn-dark {
+    background-color: #333;
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.login-card .btn-dark:hover {
+    background-color: #000;
+}
+
+
+/*contact us*/
+.btn-custom {
+    background-color: #b1b1b1; 
+    color: rgb(48, 44, 44);
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #06011d; 
+}
+
+.contact-us {
+    background-color: #09090c;
+    padding-top: 50px; 
+    padding-bottom: 50px;
+    color: white;
+    
+  
+}
