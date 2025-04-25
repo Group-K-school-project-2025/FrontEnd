@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // This function fetches templates from the server based on the selected category
   async function loadTemplates(category) {
     try {
-      const response = await fetch(`http://localhost:3001/templates/${category}`);
+      const response = await fetch(`https://backend-7hqy.onrender.com/templates/${category}`);
       const templates = await response.json();
 
       // Find the container where we want to show templates
