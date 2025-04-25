@@ -20,7 +20,7 @@ const form = document.getElementById('loginForm');
       alert('Welcome to AMi web design!');
       localStorage.setItem('username', username); // Store the username in local storage
       // for example, redirect to a dashboard page
-      window.location.href = 'dashboard.html'; //go to dashboard page
+      window.location.href = 'Dashboard.html'; //go to dashboard page
     } else {
       alert('Login failed: ' + result.message);
     }
