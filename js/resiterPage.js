@@ -1,4 +1,4 @@
-//database connection  register page
+// Database connection register page
 // Sending user data to the server
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('userForm');
@@ -26,6 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return alert('Please fill in all fields.');
         }
 
+        // Log form data for debugging
+        console.log('First Name:', first_name);
+        console.log('Last Name:', last_name);
+        console.log('Email:', email);
+        console.log('Mobile:', mobile);
+        console.log('Username:', username);
+        console.log('Password:', password);
+
         // Sending data to the server
         fetch('https://backend-7hqy.onrender.com/new', {
             method: 'POST',
@@ -44,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => {
             console.log('Server response:', response); // Log response for debugging
             if (!response.ok) {
-                throw new Error('Server responded with an error');
+                return response.json().then(err => {throw new Error(err.message)});
             }
             return response.json();
         })
@@ -53,14 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.message === 'User created successfully') {
                 alert('User registered successfully!');
                 window.location.href = 'login.html'; // Redirect to login page after successful registration
-                //form.reset(); // Reset the form after successful registration
+                // form.reset(); // Reset the form after successful registration
             } else {
                 alert('Failed to create user.');
             }
         })
         .catch(error => {
             console.error('Error saving user:', error);
-            alert('An error occurred while saving the user.');
+            alert('An error occurred while saving the user: ' + error.message); // نمایش پیام خطای دقیق
         });
     });
 });
