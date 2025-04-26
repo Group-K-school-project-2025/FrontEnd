@@ -9,27 +9,27 @@ document.addEventListener('DOMContentLoaded', function () {
   // Load templates from the server based on the selected category
   async function loadTemplates(category) {
     try {
-      const response = await fetch(`http://localhost:3001/templates/${category}`);
+      const response = await fetch(`https://backend-7hqy.onrender.com/templates/${category}`);
       const templates = await response.json();
 
       const container = document.getElementById('templateContainer');
       container.innerHTML = ''; // Clear any old templates
 
-      templates.forEach(template => {
-        const templateItem = document.createElement('div');
-        templateItem.classList.add('template-item');
 
         // Create HTML for each template
-        templateItem.innerHTML = `
-          <img src="http://localhost:3001${template.image_url}" alt="${template.title}">
-          <div class="like-price-container">
-            <p>${template.price} €</p>
-            <button class="like-btn" data-id="${template.id}">
-              <span class="like-icon">&#x2764;</span>
-              <span class="like-count">${template.likes}</span>
-            </button>
-          </div>
-        `;
+        templates.forEach(template => {
+          const templateItem = document.createElement('div');
+          templateItem.classList.add('template-item');
+          templateItem.innerHTML = `
+            <img src="https://frontend-72og.onrender.com${template.image_url}" alt="${template.title}">
+            <div class="like-price-container">
+              <p>${template.price} €</p>
+              <button class="like-btn" data-id="${template.id}">
+                <span class="like-icon">&#x2764;</span>
+                <span class="like-count">${template.likes}</span>
+              </button>
+            </div>
+          `;
 
         container.appendChild(templateItem);
 
