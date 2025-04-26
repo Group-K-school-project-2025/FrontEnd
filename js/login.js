@@ -20,7 +20,7 @@ form.addEventListener('submit', async (e) => {
         if (result.success) {
             alert('Welcome to AMi web design!');
             localStorage.setItem('username', username); // Store the username in local storage
-            window.location.href = 'dashboard.html'; // Redirect to dashboard page
+            window.location.href = 'Dashboard.html'; // Redirect to dashboard page
         } else {
             alert('Login failed: ' + result.message);
         }
