@@ -1,4 +1,4 @@
-fetch('https://backend-7hqy.onrender.com/templates')
+fetch('http://localhost:3001/templates')
             .then(response => response.json())
             .then(data => {
                 const gallery = document.querySelector('.gallery');

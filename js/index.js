@@ -18,51 +18,59 @@ document.addEventListener("DOMContentLoaded", function () {
     const images = document.querySelectorAll('.gallery-images img');
     let currentIndex = 0;
 
+    const isMobile = window.innerWidth < 768;
+
     if (indicators.length && images.length) {
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', function () {
-                indicators.forEach(ind => ind.classList.remove('active'));
-                indicator.classList.add('active');
-                images.forEach(img => img.style.display = 'none');
-                images[index].style.display = 'block';
-                currentIndex = index;
+        if (isMobile) {
+            // در حالت موبایل: فقط یک تصویر نمایش داده شود
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', function () {
+                    indicators.forEach(ind => ind.classList.remove('active'));
+                    indicator.classList.add('active');
+                    images.forEach(img => img.style.display = 'none');
+                    images[index].style.display = 'block';
+                    currentIndex = index;
+                });
             });
-        });
 
-        // تنظیم اولیه ایندیکاتورها و تصاویر
-        indicators[0].classList.add('active');
-        images.forEach((img, index) => {
-            img.style.display = index === 0 ? 'block' : 'none';
-        });
+            // حالت اولیه
+            indicators[0].classList.add('active');
+            images.forEach((img, index) => {
+                img.style.display = index === 0 ? 'block' : 'none';
+            });
 
-        // تغییر خودکار تصویر هر 5 ثانیه
-        function autoChangeImage() {
-            images[currentIndex].style.display = 'none';
-            currentIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].style.display = 'block';
+            // اسلاید خودکار
+            function autoChangeImage() {
+                images[currentIndex].style.display = 'none';
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].style.display = 'block';
+                indicators.forEach(ind => ind.classList.remove('active'));
+                indicators[currentIndex].classList.add('active');
+            }
 
-            indicators.forEach(ind => ind.classList.remove('active'));
-            indicators[currentIndex].classList.add('active');
+            setInterval(autoChangeImage, 5000);
+        } else {
+            // در حالت دسکتاپ: همه تصاویر نشان داده شوند
+            images.forEach(img => {
+                img.style.display = 'block';
+            });
         }
-
-        setInterval(autoChangeImage, 5000);
     }
 
-    // تعریف تابع goToCategory
+    // کلیک روی هر تصویر گالری برای رفتن به صفحه دسته‌بندی
     function goToCategory(categoryName) {
         window.location.href = `Category.html?category=${categoryName}`;
     }
 
-    // تنظیم تصاویر قابل کلیک در گالری
     const galleryItems = document.querySelectorAll('.gallery-item');
     galleryItems.forEach(item => {
         item.addEventListener('click', function () {
-            const category = this.getAttribute('onclick').match(/'([^']+)'/)[1]; // گرفتن نام دسته‌بندی از onclick
-            goToCategory(category); // انتقال به صفحه دسته‌بندی
+            const category = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+            goToCategory(category);
         });
     });
 
-    // slider horizontal clickable items
+    // اسلایدهای کلیک‌پذیر
     let slides = document.querySelectorAll(".clickable-slide");
     slides.forEach((slide) => {
         slide.addEventListener("click", function () {
@@ -72,4 +80,21 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    // دکمه‌های اسکرول افقی گالری
+    const gallery = document.querySelector('.gallery-images');
+    const scrollAmount = 500;
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    if (prevBtn && nextBtn && gallery) {
+        prevBtn.addEventListener('click', () => {
+            gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    }
 });

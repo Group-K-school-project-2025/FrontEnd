@@ -6,7 +6,7 @@
     <title>Contact AMI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ContactUs.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -28,7 +28,7 @@
                 <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="registerPage.html">Register</a></li>
                 <li class="nav-item"><a class="nav-link" href="Category.html">Templates</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="Services.html">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="aboutUs.html">About us</a></li>
                 <li class="nav-item"><a class="nav-link" href="contactUs.html">Contact us</a></li>
                 <li class="nav-item"><a class="nav-link" href="shoppingCart.html">Shopping cart</a></li>
@@ -50,7 +50,7 @@
                 <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="registerPage.html">Register</a></li>
                 <li class="nav-item"><a class="nav-link" href="Category.html">Templates</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="Services.html">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="aboutUs.html">About us</a></li>
                 <li class="nav-item"><a class="nav-link" href="contactUs.html">Contact us</a></li>
                 <li class="nav-item"><a class="nav-link" href="shoppingCart.html">Shopping cart</a></li>
@@ -81,25 +81,25 @@
     </a>
 </div>
 
+    <!-- Message Form -->
+    <form class="mt-4" id="messageForm">
+        <div class="mb-3">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" rows="5" placeholder="Write your message here..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-custom">Send Message</button>
+    </form>
 
-        <!-- Message Form -->
-        <form class="mt-4">
-            <div class="mb-3">
-                <label for="name" class="form-label">Your Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter your name">
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email">
-            </div>
-            <div class="mb-3">
-                <label for="message" class="form-label">Message</label>
-                <textarea class="form-control" id="message" rows="5" placeholder="Write your message here..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-custom">Send Message</button>
-        </form>
-    </div>
 
+    
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
         <div class="container">
@@ -113,7 +113,7 @@
         </div>
     </footer>
 
-    <script src="js/index.js"></script>
+    <script src="js/contactUs.js"></script>
     
 </body>
 </html>

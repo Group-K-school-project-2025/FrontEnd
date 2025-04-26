@@ -1,75 +1,90 @@
 /* Dashboard CSS file */
 /* first page style */
 img {
-    width: 60%;
-  }
+  width: 60%;
+}
 
-  /* photos under the picture as a button */
+/* photos under the picture as a button */
+.responsive-gallery {
+  background-color:rgba(33,37,41,255);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 20px;
+  padding: 20px;
+}
+
+.image-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.image-button img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.image-button img:hover {
+  transform: scale(1.05);
+}
+
+/* 📱 mobile */
+@media (max-width: 768px) {
   .responsive-gallery {
-    background-color:rgba(33,37,41,255);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns */
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .image-button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-  }
-  
-  .image-button img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-  }
-  
-  .image-button img:hover {
-    transform: scale(1.05);
-  }
-  
-  /* 📱 mobile */
-  @media (max-width: 768px) {
-    .responsive-gallery {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
+}
 
-  /* -------------------------------
-    Navbar
+
+/* -------------------------------
+  Navbar
 --------------------------------*/
 .navbar {
-  background-color: #636262 !important;
-  padding-top: 0.2rem; 
-      padding-bottom: 0.2rem;
+background-color: #636262 !important;
+padding-top: 0.2rem; 
+    padding-bottom: 0.2rem;
 }
 
 
 .offcanvas-custom {
-  width: 50%;
+width: 50%;
 }
 
 /* footer */
 html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-    flex: 1;
+  flex: 1;
 }
 
 footer {
-    background-color: black;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    width: 100%;
-    
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  width: 100%;
+  
 }
+
+
+/* برای تصویر داشبورد، فقط در سایز دسکتاپ */
+@media (min-width: 1024px) {
+.dashboard-main-img {
+  width: 25%; /* عرض رو در دسکتاپ 80% می‌کنیم */
+  height: auto;
+}
+
+
+}
+
+
+
+

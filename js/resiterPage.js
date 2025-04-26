@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Sending data to the server
-        fetch('https://backend-7hqy.onrender.com/new', {
+        fetch('http://localhost:3001/new', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
