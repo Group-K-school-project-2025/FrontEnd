@@ -1,5 +1,4 @@
-
-//database connection  register page
+// Database connection register page
 // Sending user data to the server
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('userForm');
@@ -24,11 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check if all fields are filled
         if (!first_name || !last_name || !email || !mobile || !username || !password) {
-            return alert('Please fill in all fields.');
+            alert('Please fill in all fields.');
+            return;
         }
 
         // Sending data to the server
-        fetch('http://localhost:3001/new', {
+        fetch('https://backend-7hqy.onrender.com/new', {  // <<< اینجا اصلاح شد
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.message === 'User created successfully') {
                 alert('User registered successfully!');
                 window.location.href = 'login.html'; // Redirect to login page after successful registration
-                //form.reset(); // Reset the form after successful registration
             } else {
                 alert('Failed to create user.');
             }
@@ -65,5 +64,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-

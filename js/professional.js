@@ -12,7 +12,7 @@ form.addEventListener('submit', function (event) {
     purpose: form.purpose.value
   };
 
-  fetch('http://localhost:3001/submit-form', {
+  fetch('https://backend-7hqy.onrender.com/submit-form', {   // ✅ آدرس درست شد
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -28,11 +28,8 @@ form.addEventListener('submit', function (event) {
     if (goToHomepage) {
       window.location.href = '/index.html'; // Redirect to the homepage
     }
-  
-    
   })
   .catch(error => {
     console.error("Error submitting form:", error);
   });
 });
-

@@ -7,7 +7,7 @@ document.getElementById('messageForm').addEventListener('submit', function (even
         message: document.getElementById('message').value,
     };
 
-    fetch('http://localhost:3001/submit-message', {
+    fetch('https://backend-7hqy.onrender.com/submit-message', {  // ✅ اینجا آدرس درست شد
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

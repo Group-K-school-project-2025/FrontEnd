@@ -1,4 +1,4 @@
-// Define the emptyCartHTML function first
+// Define the emptyCartHTML function
 function emptyCartHTML() {
   return `
     <div class="empty-cart-message">
@@ -18,67 +18,39 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   let total = 0;
 
-  // If the user is logged in
   if (userId) {
     try {
-      const response = await fetch(`http://localhost:3001/cart/${userId}`);
+      const response = await fetch(`https://backend-7hqy.onrender.com/cart/${userId}`);
       const items = await response.json();
 
       if (!Array.isArray(items) || items.length === 0) {
-        container.innerHTML = emptyCartHTML(); // Call the emptyCartHTML function
-        cartTotal.textContent = "€0.00";
-        if (checkoutBtn) checkoutBtn.disabled = true;
+        showEmptyCart(container, cartTotal, checkoutBtn);
         return;
       }
 
       items.forEach((item, index) => {
         if (typeof item.price === 'number' && typeof item.quantity === 'number') {
           total += item.price * item.quantity;
-
-          const itemDiv = document.createElement('div');
-          itemDiv.className = 'cart-item d-flex justify-content-between align-items-center mb-3';
-          itemDiv.innerHTML = `
-            <img src="http://localhost:3001/${item.image_url}" alt="${item.title}" />
-            <div>
-              <h5>${item.title}</h5>
-              <p>€${item.price.toFixed(2)} x ${item.quantity}</p>
-            </div>
-            <button class="btn btn-danger btn-sm" onclick="removeProduct(${index})">✖</button>
-          `;
-          container.appendChild(itemDiv);
+          container.appendChild(createCartItemHTML(item.image_url, item.title, item.price, item.quantity, index, true));
         }
       });
 
       cartTotal.textContent = `€${total.toFixed(2)}`;
     } catch (err) {
       console.error("Error loading cart from database:", err);
+      showEmptyCart(container, cartTotal, checkoutBtn);
     }
   } else {
-    // If the user is not logged in, use localStorage cart items
     if (cartItemsFromLocal.length === 0) {
-      container.innerHTML = emptyCartHTML();
-      cartTotal.textContent = "€0.00";
-      if (checkoutBtn) checkoutBtn.disabled = true;
+      showEmptyCart(container, cartTotal, checkoutBtn);
       return;
     }
 
     cartItemsFromLocal.forEach((item, index) => {
       const price = parseFloat(item.price);
-
       if (!isNaN(price)) {
         total += price;
-
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'cart-item d-flex justify-content-between align-items-center mb-3';
-        itemDiv.innerHTML = `
-          <img src="${item.img}" alt="${item.name}" />
-          <div>
-            <h5>${item.name}</h5>
-            <p>€${price.toFixed(2)}</p>
-          </div>
-          <button class="btn btn-danger btn-sm" onclick="removeProduct(${index})">✖</button>
-        `;
-        container.appendChild(itemDiv);
+        container.appendChild(createCartItemHTML(item.img, item.name, price, 1, index, false));
       }
     });
 
@@ -86,62 +58,56 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
-// Function to remove product from the cart
+// Create a cart item HTML element
+function createCartItemHTML(imgSrc, title, price, quantity, index, fromDatabase) {
+  const itemDiv = document.createElement('div');
+  itemDiv.className = 'cart-item d-flex justify-content-between align-items-center mb-3';
+  itemDiv.innerHTML = `
+    <img src="${fromDatabase ? `https://backend-7hqy.onrender.com/${imgSrc}` : imgSrc}" alt="${title}" />
+    <div>
+      <h5>${title}</h5>
+      <p>€${price.toFixed(2)} ${quantity > 1 ? `x ${quantity}` : ''}</p>
+    </div>
+    <button class="btn btn-danger btn-sm" onclick="removeProduct(${index})">✖</button>
+  `;
+  return itemDiv;
+}
+
+// Display empty cart
+function showEmptyCart(container, cartTotal, checkoutBtn) {
+  container.innerHTML = emptyCartHTML();
+  cartTotal.textContent = "€0.00";
+  if (checkoutBtn) checkoutBtn.disabled = true;
+}
+
+// Function to remove product from the cart (localStorage version)
 function removeProduct(index) {
-  // Update localStorage after removing the item from the cart
   let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  cartItems.splice(index, 1); // Remove product from array
-  localStorage.setItem('cart', JSON.stringify(cartItems)); // Update localStorage
-
-  // After removing the product, update the cart display
-  displayCart();
+  cartItems.splice(index, 1); // Remove product
+  localStorage.setItem('cart', JSON.stringify(cartItems)); // Update storage
+  displayCart(); // Refresh cart view
 }
 
-// Function to update the total price
-function updateTotal() {
-  let total = 0;
-  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  cartItems.forEach(item => {
-    total += parseFloat(item.price);
-  });
-
-  document.getElementById('cart-total').innerText = `€${total.toFixed(2)}`;
-}
-
-// Display the cart when the page loads
+// Display the cart based on localStorage
 function displayCart() {
   const container = document.querySelector('.cart-items');
   const cartTotal = document.getElementById('cart-total');
   const checkoutBtn = document.getElementById('checkout-btn');
   let total = 0;
 
-  container.innerHTML = ''; // Clear current cart items
+  container.innerHTML = '';
 
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
   if (cartItems.length === 0) {
-    container.innerHTML = emptyCartHTML();
-    cartTotal.textContent = "€0.00";
-    if (checkoutBtn) checkoutBtn.disabled = true;
+    showEmptyCart(container, cartTotal, checkoutBtn);
     return;
   }
 
   cartItems.forEach((item, index) => {
     const price = parseFloat(item.price);
-
     if (!isNaN(price)) {
       total += price;
-
-      const itemDiv = document.createElement('div');
-      itemDiv.className = 'cart-item d-flex justify-content-between align-items-center mb-3';
-      itemDiv.innerHTML = `
-        <img src="${item.img}" alt="${item.name}" />
-        <div>
-          <h5>${item.name}</h5>
-          <p>€${price.toFixed(2)}</p>
-        </div>
-        <button class="btn btn-danger btn-sm" onclick="removeProduct(${index})">✖</button>
-      `;
-      container.appendChild(itemDiv);
+      container.appendChild(createCartItemHTML(item.img, item.name, price, 1, index, false));
     }
   });
 
@@ -154,14 +120,14 @@ async function sendCartToServer(userId) {
 
   try {
     for (let item of cartItems) {
-      const response = await fetch(`http://localhost:3001/cart/${userId}`, {
+      const response = await fetch(`https://backend-7hqy.onrender.com/cart/${userId}`, {  // <<< اینجا هم اصلاح شد
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          templateId: item.id, // Or any ID you have
-          quantity: item.quantity
+          templateId: item.id, // Make sure `id` exists
+          quantity: item.quantity || 1
         })
       });
 
