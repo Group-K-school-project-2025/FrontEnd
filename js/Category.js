@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
           templateItem.classList.add('template-item');
           templateItem.innerHTML = `
             <img src="https://frontend-72og.onrender.com${template.image_url}" alt="${template.title}">
+
             <div class="like-price-container">
               <p>${template.price} €</p>
               <button class="like-btn" data-id="${template.id}">
